@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-export class Product {}
+import { Provider } from 'src/providers/entities/provider.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+
 @Entity()
-export class CreateProductDto {
+export class Product {
 @PrimaryGeneratedColumn("uuid")
 productId: string;
 @Column({type: "text"})
@@ -12,4 +13,6 @@ price: number;
 countSeal: number;
 // @Column({type: "uuid"})
 // provider: string;
-}
+@ManyToOne(() => Provider, (provider) => provider.products)
+    provider: Provider;
+    }
