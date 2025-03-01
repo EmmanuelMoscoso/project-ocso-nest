@@ -17,6 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     password: process.env.password,
     database: process.env.name,
     entities: [],
+    autoLoadEntities: true,
     synchronize: true,
   }),
     EmployeesModule, ProductsModule],
