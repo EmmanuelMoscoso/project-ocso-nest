@@ -11,8 +11,7 @@ productName: string;
 price: number;
 @Column({type: "int"})
 countSeal: number;
-// @Column({type: "uuid"})
-// provider: string;
+
 @ManyToOne(() => Provider, (provider) => provider.products)
     provider: Provider;
     }
