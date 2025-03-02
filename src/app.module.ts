@@ -6,6 +6,9 @@ import { EmployeesModule } from './employees/employees.module';
 import { ProductsModule } from './products/products.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProvidersModule } from './providers/providers.module';
+import { ManagersModule } from './managers/managers.module';
+import { LocationsModule } from './locations/locations.module';
+import { RegiosModule } from './regios/regios.module';
 
 @Module({
   imports: [
@@ -21,7 +24,7 @@ import { ProvidersModule } from './providers/providers.module';
     autoLoadEntities: true,
     synchronize: true,
   }),
-    EmployeesModule, ProductsModule, ProvidersModule],
+    EmployeesModule, ProductsModule, ProvidersModule, ManagersModule, LocationsModule, RegiosModule],
   controllers: [AppController],
   providers: [AppService],
 })
