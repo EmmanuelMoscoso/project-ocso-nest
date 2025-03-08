@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ProvidersModule } from './providers/providers.module';
 import { ManagersModule } from './managers/managers.module';
 import { LocationsModule } from './locations/locations.module';
-import { RegiosModule } from './regios/regios.module';
+import { RegionsModule } from './regions/regions.module';
 
 @Module({
   imports: [
@@ -24,7 +24,7 @@ import { RegiosModule } from './regios/regios.module';
     autoLoadEntities: true,
     synchronize: true,
   }),
-    EmployeesModule, ProductsModule, ProvidersModule, ManagersModule, LocationsModule, RegiosModule],
+    EmployeesModule, ProductsModule, ProvidersModule, ManagersModule, LocationsModule, RegionsModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,15 +1,16 @@
 import { IsEmail, IsOptional, IsString, Max, MaxLength } from "class-validator";
+import { Provider } from "../entities/provider.entity";
 
-export class CreateProviderDto {
+export class CreateProviderDto extends Provider{
     @IsString()
     @MaxLength(100)
-    providerName: string;
+    providerName: string = '';
     @IsEmail()
     @IsString()
-    providerEmail: string;
+    providerEmail: string = '';
     @IsString()
     @MaxLength(15)
     @IsOptional()
-    providerPhoneNumber: string;
+    providerPhoneNumber: string = '';
 
 }
