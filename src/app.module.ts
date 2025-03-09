@@ -9,6 +9,7 @@ import { ProvidersModule } from './providers/providers.module';
 import { ManagersModule } from './managers/managers.module';
 import { LocationsModule } from './locations/locations.module';
 import { RegionsModule } from './regions/regions.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,13 +19,13 @@ import { RegionsModule } from './regions/regions.module';
     host: process.env.host,
     port: +(process.env.port || 5432),
     username: 'postgres',
-    password: process.env.password,
+    password: process.env.pass,
     database: process.env.name,
     entities: [],
     autoLoadEntities: true,
     synchronize: true,
   }),
-    EmployeesModule, ProductsModule, ProvidersModule, ManagersModule, LocationsModule, RegionsModule],
+    EmployeesModule, ProductsModule, ProvidersModule, ManagersModule, LocationsModule, RegionsModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
