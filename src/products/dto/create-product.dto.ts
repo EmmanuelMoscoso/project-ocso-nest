@@ -1,4 +1,4 @@
-import { IsInt, IsNumber, IsOptional, IsString, IsUUID, Max, MaxLength } from "class-validator";
+import { IsInt, IsNumber, IsObject, IsOptional, IsString, IsUUID, Max, MaxLength } from "class-validator";
 import { Provider } from "src/providers/entities/provider.entity";
 import { Product } from "../entities/product.entity";
 
@@ -14,7 +14,6 @@ productName: string = '';
 price: number = 0;
 @IsInt()
 countSeal: number = 0;
-@IsUUID("4")
-@IsString()
+@IsObject()
 provider: Provider = new Provider();
 }
