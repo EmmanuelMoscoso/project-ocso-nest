@@ -14,6 +14,6 @@ productName: string = '';
 price: number = 0;
 @IsInt()
 countSeal: number = 0;
-@IsObject()
-provider: Provider = new Provider();
+@IsString()
+provider: string = '';
 }

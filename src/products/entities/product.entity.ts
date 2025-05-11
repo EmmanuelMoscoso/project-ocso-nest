@@ -16,5 +16,5 @@ countSeal: number;
 @JoinColumn({
     name: "providerId"
 })
-provider: Provider;
+provider: string;
 }

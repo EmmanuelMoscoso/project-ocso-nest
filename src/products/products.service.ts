@@ -20,16 +20,16 @@ export class ProductsService {
 
   findAll() {
     return this.productRepository.find({
-      loadEagerRelations: true,
-      relations: {
-        provider: true,
-      }
+      relations: ['provider'],
     });
   }
 
   findOne(id: string) {
-    const product = this.productRepository.findOneBy({
-      productId: id,
+    const product = this.productRepository.findOne({
+      where: {
+        productId: id,
+      },
+      relations: ['provider']
     })
     if (!product) throw new NotFoundException();
     return product;
@@ -38,7 +38,7 @@ export class ProductsService {
   findByProvider(id: string) {
     this.productRepository.findBy({
       provider: {
-        providerId: id,
+        providerId: id, // arreglar a futuro
       }
     })
   }

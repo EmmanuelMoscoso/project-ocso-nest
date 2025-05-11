@@ -16,7 +16,9 @@ export class ProvidersService {
   }
 
   findAll() {
-    return this.providerRepository.find();
+    return this.providerRepository.find({relations: {
+      products: true,
+    }})
   }
 
   findByName(name: string) {
@@ -30,10 +32,14 @@ export class ProvidersService {
   }
 
   findOne(id: string) {
-    const provider = this.providerRepository.findOneBy({
-      providerId: id,
+    return this.providerRepository.findOne({
+      where : {
+        providerId: id
+      },
+      relations: {
+        products: true,
+      }
     })
-    return provider;
   }
 
   async update(id: string, updateProviderDto: UpdateProviderDto) {
