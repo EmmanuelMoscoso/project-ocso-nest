@@ -26,7 +26,7 @@ export class Employee {
     @JoinColumn({
         name: "LocationId"
     })
-    location: Location;
+    location: Location | string;
 
     @OneToOne(() => User)
     @JoinColumn({

@@ -40,18 +40,30 @@ export class EmployeesController {
   })
   
   @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto) {
-    return this.employeesService.create(createEmployeeDto);
+  @UseInterceptors(FileInterceptor("employeePhoto"))
+  async create(
+    @Body() createEmployeeDto: CreateEmployeeDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    if (!file) {
+      return this.employeesService.create(createEmployeeDto);
+    } else {
+      const photoUrl = await this.awsService.uploadFile(file);
+      //createEmployeeDto.employeePhoto = photoUrl;
+      return this.employeesService.create(createEmployeeDto);
+    }
   }
 
   @Auth(ROLES.MANAGER, ROLES.EMPLOYEE)
   @Post(":id/upload")
   @UseInterceptors(FileInterceptor("file"))
-  async uploadPhoto(@Param('id') id: string,@UploadedFile() file: Express.Multer.File) {
-    const response = await this.awsService.uploadFile(file)
-    return this.employeesService.update(id, {
-      //employeePhoto: response <-- fix una vez implementado lo de la bucket
-    })
+  async uploadPhoto(
+    @Param("id") id: string,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    const response = await this.awsService.uploadFile(file);
+    //employeePhoto: response <-- fix una vez implementado lo de la bucket
+    return response;
   }
 
   @Auth(ROLES.MANAGER)
@@ -73,9 +85,16 @@ export class EmployeesController {
   }
 
   @Auth(ROLES.MANAGER, ROLES.EMPLOYEE)
+  @UseInterceptors(FileInterceptor("employeePhoto"))
   @Patch(":id")
-  update(@Param("id", new ParseUUIDPipe({version: "4"})) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
-    return this.employeesService.update(id, updateEmployeeDto);
+  async update(@Param("id", new ParseUUIDPipe({version: "4"})) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto, @UploadedFile() file: Express.Multer.File,) {
+    if (file.originalname == "undefined") {
+      return this.employeesService.update(id, updateEmployeeDto);
+    } else {
+      const fileUrl = await this.awsService.uploadFile(file);
+      //updateEmployeeDto.employeePhoto = fileUrl;
+      return this.employeesService.update(id, updateEmployeeDto);
+    }
   }
 
   @Auth(ROLES.MANAGER)
